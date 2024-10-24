@@ -1,9 +1,7 @@
-package org.example.spring_sql.Repository;
+package org.example.spring_sql.repository;
 
-import org.example.spring_sql.Model.Administrator;
+import org.example.spring_sql.model.Administrator;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

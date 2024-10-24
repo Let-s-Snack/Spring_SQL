@@ -1,8 +1,7 @@
-package org.example.spring_sql.Service;
+package org.example.spring_sql.service;
 
-import org.example.spring_sql.Model.Administrator;
-import org.example.spring_sql.Repository.AdministratorRepository;
-import org.mindrot.jbcrypt.BCrypt;
+import org.example.spring_sql.model.Administrator;
+import org.example.spring_sql.repository.AdministratorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

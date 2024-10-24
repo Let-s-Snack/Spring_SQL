@@ -1,4 +1,4 @@
-package org.example.spring_sql.Controller;
+package org.example.spring_sql.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -6,16 +6,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.example.spring_sql.Model.Administrator;
-import org.example.spring_sql.Service.AdministratorService;
+import org.example.spring_sql.model.Administrator;
+import org.example.spring_sql.service.AdministratorService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
-
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/administrator")

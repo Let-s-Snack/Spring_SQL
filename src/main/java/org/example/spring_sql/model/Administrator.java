@@ -1,4 +1,4 @@
-package org.example.spring_sql.Model;
+package org.example.spring_sql.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
