@@ -24,9 +24,10 @@ jobs:
         run: mvn -B package --file pom.xml #-DskipTests usado para skipar as variaveis de ambiente
 
       - name: Deploy na EC2
+        #-o StrictHostKeyChecking=no
         run: |
           echo "${{secrets.KEY_SSH_EC2}}" > private_key && chmod 400 private_key
-          ssh -o StrictHostKeyChecking=no -i "private_key" ubuntu@ec2-52-20-248-152.compute-1.amazonaws.com << EOF
+          ssh -i "private_key" ubuntu@ec2-52-20-248-152.compute-1.amazonaws.com << EOF
             cd /home/ubuntu/Spring_SQL && 
             git pull origin main &&
             mvn clean package -DskipTests &&
