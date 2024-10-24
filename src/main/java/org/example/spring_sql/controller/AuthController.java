@@ -42,7 +42,7 @@ public class AuthController {
                     String token = Jwts.builder()
                             .setSubject(adm.getEmail())
                             .claim("roles", Collections.emptyList())
-                            .setExpiration(new Date(System.currentTimeMillis() + 60_000)) // Token válido por 30 minutos
+                            .setExpiration(new Date(System.currentTimeMillis() + 1_800_000)) // Token válido por 30 minutos
                             .signWith(secretKey, SignatureAlgorithm.HS512) //Usa a chave secreta para assinar
                             .compact();
 
