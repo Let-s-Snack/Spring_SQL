@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Compilar por MAVEN
-        run: mvn -B package --file pom.xml #-DskipTests usado para skipar as variaveis de ambiente
+        run: mvn -B package --file pom.xml -DskipTests #usado para skipar as variaveis de ambiente
 
       - name: Deploy na EC2
         run: |
