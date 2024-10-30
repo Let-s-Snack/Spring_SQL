@@ -2,6 +2,7 @@ package org.example.spring_sql.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -9,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.example.spring_sql.model.Administrator;
 import org.example.spring_sql.service.AdministratorService;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +39,8 @@ public class AdministratorController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(example = "Erro interno no servidor"))),
     })
-    public ResponseEntity<?> findAllAdminstrators(){
+    public ResponseEntity<?> findAllAdminstrators(@Parameter(in = ParameterIn.HEADER, description = "Token de autenticação")
+                                                      @RequestHeader(HttpHeaders.AUTHORIZATION) String authToken){
         try{
             return ResponseEntity.ok(administratorService.findAllAdministrators());
         } catch (HttpServerErrorException.InternalServerError ise) {
@@ -61,7 +64,7 @@ public class AdministratorController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(example = "Erro interno no servidor"))),
     })
-    public ResponseEntity<?> findAdministratorById(@Parameter(description = "ID do usuário", example = "1") @PathVariable Integer id){
+    public ResponseEntity<?> findAdministratorById(@Parameter(description = "ID do usuário", example = "1") @PathVariable Integer id, @Parameter(description = "Token de autenticação JWT") @RequestHeader("Authorization") String authorizationHeader){
         try{
             return ResponseEntity.ok(administratorService.findAdministratorById(id));
         } catch (HttpServerErrorException.InternalServerError ise) {
@@ -85,7 +88,7 @@ public class AdministratorController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(example = "Erro interno no servidor"))),
     })
-    public ResponseEntity<?> findAdministratorByName(@Parameter(description = "Nome do usuário", example = "Yudi") @PathVariable String name){
+    public ResponseEntity<?> findAdministratorByName(@Parameter(description = "Nome do usuário", example = "Yudi") @PathVariable String name, @Parameter(description = "Token de autenticação JWT") @RequestHeader("Authorization") String authorizationHeader){
         try{
             return ResponseEntity.ok(administratorService.findAdministratorByName(name));
         } catch (HttpServerErrorException.InternalServerError ise) {
@@ -109,7 +112,7 @@ public class AdministratorController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(example = "Erro interno no servidor"))),
     })
-    public ResponseEntity<?> findAdministratorByEmailAndPassword(@Parameter(description = "E-mail do administrador", example = "enzo.hino@germinare.org.br") @RequestParam String email, @Parameter(description = "Senha do usuário", example = "123") @RequestParam String password){
+    public ResponseEntity<?> findAdministratorByEmailAndPassword(@Parameter(description = "E-mail do administrador", example = "enzo.hino@germinare.org.br") @RequestParam String email, @Parameter(description = "Senha do usuário", example = "123") @RequestParam String password, @Parameter(description = "Token de autenticação JWT") @RequestHeader("Authorization") String authorizationHeader){
         try{
             Administrator administrator = administratorService.findAdministratorByEmail(email);
 
