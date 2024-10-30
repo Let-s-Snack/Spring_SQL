@@ -1,12 +1,7 @@
-<!-- 
-Para pull requests direcionados ao branch develop, use o template abaixo: 
--->
-[//]: # (Use o template_develop.md)
+### Descrição
 
-<!-- 
-Para pull requests direcionados ao branch main, use o template abaixo:
--->
-[//]: # (Use o template_main.md)
+Adicione aqui a descrição sobre o seu Pull Request.
 
-## Descrição
-<!-- Descreva brevemente as mudanças feitas neste pull request -->
+### Fotos/Vídeos
+
+Adicione aqui evidências que sua task funciona e não está quebrando o código.
