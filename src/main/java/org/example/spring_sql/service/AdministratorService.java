@@ -34,5 +34,4 @@ public class AdministratorService {
     public Administrator findAdministratorByEmail(String email){
         return administratorRepository.findAdministratorByEmailAndIsDeletedIsFalse(email);
     }
-
 }
