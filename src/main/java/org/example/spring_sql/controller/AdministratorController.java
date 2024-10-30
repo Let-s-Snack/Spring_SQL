@@ -1,5 +1,6 @@
 package org.example.spring_sql.controller;
 
+import com.google.gson.Gson;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -8,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.example.spring_sql.model.Administrator;
+import org.example.spring_sql.model.Message;
 import org.example.spring_sql.service.AdministratorService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,8 @@ import org.springframework.web.client.HttpServerErrorException;
 @RequestMapping("/administrator")
 public class AdministratorController {
     private final AdministratorService administratorService;
+    private Gson gson;
+
 
     public AdministratorController(AdministratorService administratorService){
         this.administratorService = administratorService;
@@ -44,9 +48,9 @@ public class AdministratorController {
         try{
             return ResponseEntity.ok(administratorService.findAllAdministrators());
         } catch (HttpServerErrorException.InternalServerError ise) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Não foi possível encontrar os administradores!");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(gson.toJson(new Message("Não foi possível encontrar os administradores!")));
         } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro no servidor.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(gson.toJson(new Message("Erro no servidor!")));
         }
     }
 
@@ -68,9 +72,9 @@ public class AdministratorController {
         try{
             return ResponseEntity.ok(administratorService.findAdministratorById(id));
         } catch (HttpServerErrorException.InternalServerError ise) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Não foi possível encontrar os administradores!");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(gson.toJson(new Message("Não foi possível encontrar os administradores!")));
         } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro no servidor.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(gson.toJson(new Message("Erro no servidor!")));
         }
     }
 
@@ -92,9 +96,9 @@ public class AdministratorController {
         try{
             return ResponseEntity.ok(administratorService.findAdministratorByName(name));
         } catch (HttpServerErrorException.InternalServerError ise) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Não foi possível encontrar os administradores!");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(gson.toJson(new Message("Não foi possível encontrar os administradores!")));
         } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro no servidor.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(gson.toJson(new Message("Erro no servidor!")));
         }
     }
 
@@ -126,13 +130,11 @@ public class AdministratorController {
                 return ResponseEntity.ok("Não foi possível encontrar o administrador");
             }
         } catch (HttpServerErrorException.InternalServerError ise) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Não foi possível encontrar os administradores!");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(gson.toJson(new Message("Não foi possível encontrar os administradores!")));
         } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro no servidor.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(gson.toJson(new Message("Erro no servidor!")));
         }
     }
-
-
 
     // Verifica se a senha corresponde ao hash
     public static boolean checkPassword(String password, String hashed) {
