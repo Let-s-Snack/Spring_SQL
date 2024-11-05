@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.example.spring_sql.model.Administrator;
+import org.example.spring_sql.model.Message;
 import org.example.spring_sql.service.AdministratorService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.HttpStatus;
@@ -62,7 +63,7 @@ public class AuthController {
                             .signWith(secretKey, SignatureAlgorithm.HS512) //Usa a chave secreta para assinar
                             .compact();
 
-                    return ResponseEntity.ok(token);
+                    return ResponseEntity.ok(new Message(token));
                 } catch (Exception e) {
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao gerar o Token JWT");
                 }
